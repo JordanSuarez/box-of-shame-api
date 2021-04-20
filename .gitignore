@@ -2,12 +2,8 @@
 node_modules
 
 # Locales
-config
 .env
 
 # IDE
 .DS_Store
 .idea
-
-
-config.js
