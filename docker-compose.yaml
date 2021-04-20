@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  box-of-shame-db:
+    container_name: box-of-shame-db
+    image: mysql:latest
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_USER: $MYSQL_ROOT_USER
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+    volumes:
+      - box-of-shame-db-data:/var/lib/mysql
+    ports:
+      - $MYSQL_LOCAL_PORT:$MYSQL_LOCAL_PORT
+  box-of-shame-api:
+    container_name: box-of-shame-api
+    command: "npm start"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - box-of-shame-db
+    stdin_open: true
+    tty: true
+    env_file: .env
+    ports:
+      - $API_PORT:$API_PORT
+    volumes:
+      - .:/usr/src/app
+volumes:
+  box-of-shame-db-data:
+
+
+
+
+
+
