@@ -1,5 +1,15 @@
-.env
+# Modules
 node_modules
+
+# Locales
 config
-config.js
+.env
+
+# IDE
 .DS_Store
+.idea
+
+
+
+
+config.js
