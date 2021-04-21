@@ -13,10 +13,11 @@ class UserController {
 
   async createUser(req, res) {
     try {
-      const toto = {
-        name: req.body.name,
-      };
-      const user = await models.user.create(toto);
+      if (!req.body.email || !req.body.password || !req.body.password) {
+        return res.status(400).send({ error: 'Data not formatted properly' });
+      }
+      const newUser = await userService.formatUser(req.body);
+      const user = await models.user.create(newUser);
       return res.status(200).json(user);
     } catch (err) {
       return res.status(500).send({ message: err });

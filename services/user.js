@@ -1,10 +1,15 @@
+const bcrypt = require('bcryptjs');
+
+const saltRounds = 10;
+
 class UserService {
-  formatUser(userObject) {
+  async formatUser(userObject) {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const password = await bcrypt.hash(userObject.password, salt);
     return {
-      id: userObject.id,
       username: userObject.username,
-      password: userObject.password,
       email: userObject.email,
+      password,
     };
   }
 }
