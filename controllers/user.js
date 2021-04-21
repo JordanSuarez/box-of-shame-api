@@ -2,10 +2,22 @@ const models = require('../models');
 const userService = require('../services/user');
 
 class UserController {
+  async getUserById(req, res) {
+    const { id } = req.params;
+    try {
+      const user = await models.user.findByPk(id);
+      const userFormatted = userService.formatUser(user);
+      return res.status(200).json(userFormatted);
+    } catch (err) {
+      return res.status(500).json({ message: 'User not found', err });
+    }
+  }
+
   async getUsers(req, res) {
     try {
       const users = await models.user.findAll({ raw: true });
-      return res.status(200).json(users);
+      const usersFormatted = users.map((user) => userService.formatUser(user));
+      return res.status(200).json(usersFormatted);
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -13,12 +25,11 @@ class UserController {
 
   async createUser(req, res) {
     try {
-      if (!req.body.email || !req.body.password || !req.body.password) {
-        return res.status(400).send({ error: 'Data not formatted properly' });
+      const userCreated = await userService.createUser(req.body);
+      if (userCreated) {
+        return res.status(200).json(userCreated);
       }
-      const newUser = await userService.formatUser(req.body);
-      const user = await models.user.create(newUser);
-      return res.status(200).json(user);
+      return res.status(400).send({ error: 'Data not formatted properly' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -26,4 +37,5 @@ class UserController {
 }
 
 const userController = new UserController();
+
 module.exports = userController;
