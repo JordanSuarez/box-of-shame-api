@@ -34,6 +34,28 @@ class UserController {
       return res.status(500).send({ message: err });
     }
   }
+
+  async updateUser(req, res) {
+    try {
+      const { id } = req.params;
+      await models.user.update(req.body, { where: { id } });
+      const userUpdated = await userService.getUserByParam({ id });
+      const user = userService.formatUser(userUpdated);
+      return res.status(200).json({ user });
+    } catch (err) {
+      return res.status(500).send({ message: err });
+    }
+  }
+
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+      await models.user.destroy({ where: { id } });
+      return res.status(200).send({ msg: 'User has been deleted successfully!' });
+    } catch (err) {
+      return res.status(500).send({ message: err });
+    }
+  }
 }
 
 const userController = new UserController();

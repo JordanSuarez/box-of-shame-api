@@ -4,6 +4,18 @@ const userService = require('../services/user');
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 class AuthController {
+  async register(req, res) {
+    try {
+      const userCreated = await userService.createUser(req.body);
+      if (userCreated) {
+        return res.status(200).json(userCreated);
+      }
+      return res.status(400).send({ error: 'Data not formatted properly' });
+    } catch (err) {
+      return res.status(500).send({ message: err });
+    }
+  }
+
   async login(req, res) {
     const { email, password } = req.body;
     if (email && password) {
@@ -18,18 +30,6 @@ class AuthController {
       } else {
         res.status(401).json({ msg: 'Password is incorrect' });
       }
-    }
-  }
-
-  async register(req, res) {
-    try {
-      const userCreated = await userService.createUser(req.body);
-      if (userCreated) {
-        return res.status(200).json(userCreated);
-      }
-      return res.status(400).send({ error: 'Data not formatted properly' });
-    } catch (err) {
-      return res.status(500).send({ message: err });
     }
   }
 }

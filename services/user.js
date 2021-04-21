@@ -31,7 +31,7 @@ class UserService {
 
   async createUser({ email, password, username }) {
     // TODO Add validation properly
-    if ((!email || !isEmail(email)) || !password || !username) {
+    if (!email || !isEmail(email) || !password || !username) {
       return false;
     }
     const newUser = await this.saveUser({ email, password, username });
