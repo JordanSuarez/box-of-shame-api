@@ -3,12 +3,13 @@ const bcrypt = require('bcryptjs');
 const userService = require('../services/user');
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
+
 class AuthController {
   async register(req, res) {
     try {
       const userCreated = await userService.createUser(req.body);
       if (userCreated) {
-        return res.status(200).json(userCreated);
+        return res.status(201).json(userCreated);
       }
       return res.status(400).send({ error: 'Data not formatted properly' });
     } catch (err) {
@@ -21,14 +22,14 @@ class AuthController {
     if (email && password) {
       const user = await userService.getUserByParam({ email });
       if (!user) {
-        res.status(401).json({ message: 'No such email found' });
+        res.status(400).json({ message: 'No such email found' });
       }
       if (await bcrypt.compare(password, user.password)) {
         const payload = { id: user.id };
         const token = jwt.sign(payload, jwtSecretKey);
         res.json({ user: userService.formatUser(user), token });
       } else {
-        res.status(401).json({ msg: 'Password is incorrect' });
+        res.status(400).json({ msg: 'Password is incorrect' });
       }
     }
   }

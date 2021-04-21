@@ -27,7 +27,7 @@ class UserController {
     try {
       const userCreated = await userService.createUser(req.body);
       if (userCreated) {
-        return res.status(200).json(userCreated);
+        return res.status(201).json(userCreated);
       }
       return res.status(400).send({ error: 'Data not formatted properly' });
     } catch (err) {
@@ -51,7 +51,7 @@ class UserController {
     try {
       const { id } = req.params;
       await models.user.destroy({ where: { id } });
-      return res.status(200).send({ msg: 'User has been deleted successfully!' });
+      return res.status(204)
     } catch (err) {
       return res.status(500).send({ message: err });
     }
