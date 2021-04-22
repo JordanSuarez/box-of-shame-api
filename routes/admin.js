@@ -2,9 +2,9 @@ const express = require('express');
 
 const adminRouter = express.Router();
 
-// const {
-//   getUsers, getUserById, updateMyProfile, deleteMyProfile, getMyProfile
-// } = require('../controllers/user');
+const {
+  deleteShame, updateShame, createShame,
+} = require('../controllers/admin');
 
 // TODO only for admin shame and users routes
 // Update user
@@ -23,9 +23,11 @@ const adminRouter = express.Router();
 //     userController.createUser(req, res);
 //   });
 
-// // Update shame
-// shameRouter.put('/update/me', updateShame);
-// // Delete shame
-// shameRouter.delete('/delete/me', deleteShame);
+// Create shame
+adminRouter.post('/shames/new', createShame);
+// Update shame
+adminRouter.put('/shames/update/:id', updateShame);
+// Delete shame
+adminRouter.delete('/shames/delete/:id', deleteShame);
 
 module.exports = adminRouter;

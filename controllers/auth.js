@@ -26,7 +26,10 @@ class AuthController {
     if (email && password) {
       const user = await userService.getUserByParam({ email });
       if (user && await bcrypt.compare(password, user.password)) {
-        const payload = { id: user.id };
+        const payload = {
+          id: user.id,
+          isAdmin: user.isAdmin,
+        };
         const token = jwt.sign(payload, jwtSecretKey);
         return res.status(200).json({ user: userService.formatUser(user), token });
       }
