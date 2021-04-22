@@ -7,11 +7,15 @@ const jwtSecretKey = process.env.JWT_SECRET_KEY;
 class AuthController {
   async register(req, res) {
     try {
-      const userCreated = await userService.createUser(req.body);
-      if (userCreated) {
-        return res.status(201).json(userCreated);
+      const isEmailExist = await userService.getUserByParam({ email: req.body.email });
+      if (!isEmailExist) {
+        const userCreated = await userService.createUser(req.body);
+        if (userCreated) {
+          return res.status(201).json(userCreated);
+        }
+        return res.status(400).send({ error: 'Data not formatted properly' });
       }
-      return res.status(400).send({ error: 'Data not formatted properly' });
+      return res.status(400).send({ error: 'Email address already taken' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }

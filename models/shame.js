@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   shame.init({
+    title: DataTypes.STRING,
     content: DataTypes.STRING,
   }, {
     sequelize,

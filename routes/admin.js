@@ -23,4 +23,9 @@ const adminRouter = express.Router();
 //     userController.createUser(req, res);
 //   });
 
+// // Update shame
+// shameRouter.put('/update/me', updateShame);
+// // Delete shame
+// shameRouter.delete('/delete/me', deleteShame);
+
 module.exports = adminRouter;

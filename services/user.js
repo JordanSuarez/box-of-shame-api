@@ -19,7 +19,6 @@ class UserService {
       id: userObject.id,
       username: userObject.username,
       email: userObject.email,
-      shamesObtained: [],
     };
   }
 
