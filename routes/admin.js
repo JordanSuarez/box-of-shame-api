@@ -1,23 +1,12 @@
 const express = require('express');
 
-const userRouter = express.Router();
+const adminRouter = express.Router();
 
-const {
-  getUsers, getUserById, updateMyProfile, deleteMyProfile, getMyProfile
-} = require('../controllers/user');
+// const {
+//   getUsers, getUserById, updateMyProfile, deleteMyProfile, getMyProfile
+// } = require('../controllers/user');
 
-// Get users list
-userRouter.get('/', getUsers);
-// Get user
-userRouter.get('/:id', getUserById);
-// Get me
-userRouter.get('/profile/me', getMyProfile);
-// Update user
-userRouter.put('/update/me', updateMyProfile);
-// Delete me
-userRouter.delete('/delete/me', deleteMyProfile);
-
-// TODO only for admin
+// TODO only for admin shame and users routes
 // Update user
 // userRouter.put('/users/:id', passport.authenticate('jwt', { session: false }),
 //   (req, res) => {
@@ -34,4 +23,4 @@ userRouter.delete('/delete/me', deleteMyProfile);
 //     userController.createUser(req, res);
 //   });
 
-module.exports = userRouter;
+module.exports = adminRouter;

@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('./utils/passport');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -10,13 +12,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // User
-const userRoutes = require('./routes/user');
-
-app.use('/', userRoutes);
-
+app.use('/users', passport.authenticate('jwt', {session: false}), userRoutes);
 // Auth
-const authRoutes = require('./routes/auth');
-
 app.use('/', authRoutes);
 
 app.use(passport.initialize());

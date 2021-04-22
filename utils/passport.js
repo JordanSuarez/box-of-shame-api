@@ -1,5 +1,7 @@
+// const { Strategy } = require('passport-local');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
+// const bcrypt = require('bcryptjs');
 const models = require('../models');
 
 const { ExtractJwt } = passportJWT;
@@ -9,16 +11,23 @@ const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.JWT_SECRET_KEY;
 
-// lets create our strategy for web token
-const strategy = new JwtStrategy(jwtOptions, (async (jwtPayload, done) => {
-  // console.log(jwtOptions.secretOrKey)
-  const user = models.user.findByPk(jwtPayload.id);
-  if (user) {
-    return await done(null, user);
-  }
-  return await done(null, false);
-}));
+passport.use(new JwtStrategy(jwtOptions, (
+  async (jwtPayload, done) => await models.user.findByPk(jwtPayload.id)
+    .then((user) => done(null, user))
+    .catch((err) => done(err))
+)));
 
-passport.use(strategy);
+// passport.use(new Strategy({
+//   usernameField: 'email',
+// },
+// ((email, password, done) => models.user.findOne({ email })
+//   .then(async (user) => {
+//     console.log(user, email, password);
+//     if (await bcrypt.compare(password, user.password)) {
+//       return done(null, user);
+//     }
+//     return done(null, false);
+//   }).catch((err) => done(err))
+// )));
 
 module.exports = passport;

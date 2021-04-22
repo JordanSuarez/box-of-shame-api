@@ -21,18 +21,47 @@ class AuthController {
     const { email, password } = req.body;
     if (email && password) {
       const user = await userService.getUserByParam({ email });
-      if (!user) {
-        res.status(400).json({ message: 'No such email found' });
-      }
-      if (await bcrypt.compare(password, user.password)) {
+      if (user && await bcrypt.compare(password, user.password)) {
         const payload = { id: user.id };
         const token = jwt.sign(payload, jwtSecretKey);
-        res.json({ user: userService.formatUser(user), token });
-      } else {
-        res.status(400).json({ msg: 'Password is incorrect' });
+        return res.status(200).json({ user: userService.formatUser(user), token });
       }
+      return res.status(403).json({ message: 'Password or email is incorrect' });
     }
+    return res.status(403).json({ message: 'Missing Credentials' });
   }
+
+  // async logout(req, res, err, user, info) {
+  //   if (err || !user) {
+  //     return res.status(400).json({
+  //       message: info ? info.message : 'Logout failed',
+  //       user,
+  //     });
+  //   }
+  //   const payload = { id: '' };
+  //   const token = await jwt.sign(payload, jwtSecretKey);
+  //   console.log('token', token);
+  //   req.logout();
+  //   return res.status(200).json({ message: 'Logout successfull' });
+  // }
+
+  // async login(req, res) {
+  //   // if (err || !user) {
+  //   //   return res.status(400).json({
+  //   //     message: info ? info.message : 'Login failed',
+  //   //     user,
+  //   //   });
+  //   // }
+  //   // return await req.login(user, { session: false }, async (error) => {
+  //   //   if (error) {
+  //   //     res.send(error);
+  //   //   }
+  //   console.log(req)
+  //     // const payload = { id: user.id };
+  //     // const token = await jwt.sign(payload, jwtSecretKey);
+  //     // return res.status(200).json({ user, token });
+  //   // });
+  // }
 }
 
 const authController = new AuthController();
