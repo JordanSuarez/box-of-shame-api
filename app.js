@@ -13,19 +13,19 @@ app.use(passport.initialize());
 // Routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
-const shameRoutes = require('./routes/shame');
-const userShameRoutes = require('./routes/userShame');
+const blameRoutes = require('./routes/blame');
+const userBlameRoutes = require('./routes/userBlame');
 const adminRoutes = require('./routes/admin');
 // Auth
 app.use('/', authRoutes);
 // User
 app.use('/users', passport.authenticate('jwt', { session: false }), userRoutes);
-// Shame
-app.use('/shames', passport.authenticate('jwt', { session: false }), shameRoutes);
-// User shame
-app.use('/random', passport.authenticate('jwt', { session: false }), userShameRoutes);
+// Blame
+app.use('/blames', passport.authenticate('jwt', { session: false }), blameRoutes);
+// User blame
+app.use('/pick-a-blame', passport.authenticate('jwt', { session: false }), userBlameRoutes);
 // Admin
-app.use('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.use('/protected', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const isAdmin = await jwtService.getUserRoleFromJwt(req);
   if (isAdmin) {
     return adminRoutes(req, res);

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.userShame, { onDelete: 'cascade', hooks: true });
+      this.hasOne(models.userBlame, { onDelete: 'cascade', hooks: true });
     }
   }
   user.init({

@@ -1,7 +1,7 @@
 const models = require('../models');
 
 class AdminController {
-  // TODO admin methods for delete/update shames and users (try to make it dynamically)
+  // TODO admin methods for delete/update blames and users (try to make it dynamically)
   // async updateUser(req, res) {
   //   try {
   //     const { id } = req.params;
@@ -25,11 +25,11 @@ class AdminController {
   //     return res.status(500).send({ message: err });
   //   }
   // }
-  async createShame(req, res) {
+  async createBlame(req, res) {
     try {
-      const shameCreated = await models.shame.create(req.body);
-      if (shameCreated) {
-        return res.status(201).json(shameCreated);
+      const blameCreated = await models.blame.create(req.body);
+      if (blameCreated) {
+        return res.status(201).json(blameCreated);
       }
       return res.status(400).send({ error: 'Data not formatted properly' });
     } catch (err) {
@@ -37,29 +37,29 @@ class AdminController {
     }
   }
 
-  async updateShame(req, res) {
+  async updateBlame(req, res) {
     try {
       // Todo check if inputs are not empties
       const { id } = req.params;
-      const [isUpdated] = await models.shame.update(req.body, { where: { id } });
+      const [isUpdated] = await models.blame.update(req.body, { where: { id } });
       if (isUpdated === 0) {
-        return res.status(400).send({ message: 'Unknown shame' });
+        return res.status(400).send({ message: 'Unknown blame' });
       }
-      const shameUpdated = await models.shame.findOne({ where: { id } });
-      return res.status(200).json({ shameUpdated });
+      const blameUpdated = await models.blame.findOne({ where: { id } });
+      return res.status(200).json({ blameUpdated });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
   }
 
-  async deleteShame(req, res) {
+  async deleteBlame(req, res) {
     try {
       const { id } = req.params;
-      const isDeleted = await models.shame.destroy({ where: { id } });
+      const isDeleted = await models.blame.destroy({ where: { id } });
       if (isDeleted === 0) {
-        return res.status(400).send({ message: 'Unknown shame' });
+        return res.status(400).send({ message: 'Unknown blame' });
       }
-      return res.status(200).send({ message: 'Shame has been deleted' });
+      return res.status(200).send({ message: 'Blame has been deleted' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }

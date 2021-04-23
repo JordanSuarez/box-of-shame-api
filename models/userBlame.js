@@ -3,7 +3,7 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class userShame extends Model {
+  class userBlame extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         hooks: true,
       });
-      this.belongsTo(models.shame, {
+      this.belongsTo(models.blame, {
         foreignKey: {
           allowNull: false,
         },
@@ -27,12 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  userShame.init({
+  userBlame.init({
     userId: DataTypes.INTEGER,
-    shameId: DataTypes.INTEGER,
+    blameId: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'userShame',
+    modelName: 'userBlame',
   });
-  return userShame;
+  return userBlame;
 };
