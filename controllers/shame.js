@@ -21,6 +21,6 @@ class ShameController {
   }
 }
 
-const userController = new ShameController();
+const shameController = new ShameController();
 
-module.exports = userController;
+module.exports = shameController;
