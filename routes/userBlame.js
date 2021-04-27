@@ -10,6 +10,8 @@ const { getRandomBlame } = require('../controllers/userBlame');
  *  get:
  *   summary: Pick a random blame
  *   description: Pick a random blame
+ *   tags:
+ *     - Blame
  *   security:
  *     - BearerAuth: [read]
  *   content:

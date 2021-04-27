@@ -12,6 +12,8 @@ const {
  *  post:
  *   summary: Create a blame
  *   description: Create a blame
+ *   tags:
+ *     - Admin
  *   security:
  *     - BearerAuth: [write]
  *   requestBody:
@@ -44,6 +46,8 @@ adminRouter.post('/blames/new', createBlame);
  *  put:
  *   summary: Update a blame
  *   description: Update a blame
+ *   tags:
+ *     - Admin
  *   security:
  *     - BearerAuth: [write]
  *   parameters:
@@ -86,6 +90,8 @@ adminRouter.put('/blames/update/:id', updateBlame);
  *  delete:
  *   summary: Delete a blame
  *   description: Delete a blame
+ *   tags:
+ *     - Admin
  *   security:
  *     - BearerAuth: [write]
  *   parameters:

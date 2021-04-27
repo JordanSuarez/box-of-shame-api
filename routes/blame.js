@@ -10,6 +10,8 @@ const { getBlameById, getBlames } = require('../controllers/blame');
  *  get:
  *   summary: Get blames list
  *   description: Get blames list
+ *   tags:
+ *     - Blame
  *   security:
  *     - BearerAuth: [read]
  *   content:
@@ -44,6 +46,8 @@ blameRouter.get('/list', getBlames);
  *  get:
  *   summary: Get a blame by id
  *   description: Get a blame by id
+ *   tags:
+ *     - Blame
  *   security:
  *     - BearerAuth: [read]
  *   parameters:

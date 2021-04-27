@@ -12,6 +12,8 @@ const {
  *  get:
  *   summary: Get users list
  *   description: Get users list
+ *   tags:
+ *     - User
  *   security:
  *     - BearerAuth: [read]
  *   content:
@@ -46,6 +48,8 @@ userRouter.get('/list', getUsers);
  *  get:
  *   summary: Get user by id
  *   description: Get user by id
+ *   tags:
+ *     - User
  *   security:
  *     - BearerAuth: [read]
  *   parameters:
@@ -88,6 +92,8 @@ userRouter.get('/:id', getUserById);
  *  get:
  *   summary: Get my profile
  *   description: Get my profile
+ *   tags:
+ *     - User
  *   security:
  *     - BearerAuth: [read]
  *   content:
@@ -122,6 +128,8 @@ userRouter.get('/profile/me', getMyProfile);
  *  put:
  *   summary: Update my profile
  *   description: Update my profile
+ *   tags:
+ *     - User
  *   security:
  *     - BearerAuth: [read]
  *   requestBody:
@@ -160,6 +168,8 @@ userRouter.put('/update/me', updateMyProfile);
  *  delete:
  *   summary: Delete my profile
  *   description: Delete my profile
+ *   tags:
+ *     - User
  *   security:
  *     - BearerAuth: [read]
  *   responses:

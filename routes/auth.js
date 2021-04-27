@@ -10,6 +10,8 @@ const { register, login, logout } = require('../controllers/auth');
  *  post:
  *   summary: Create user
  *   description: Create user
+ *   tags:
+ *     - Auth
  *   requestBody:
  *    content:
  *     application/json:
@@ -46,6 +48,8 @@ authRouter.post('/register', register);
  *  post:
  *   summary: Login to user account
  *   description: Login to user account
+ *   tags:
+ *     - Auth
  *   requestBody:
  *    content:
  *     application/json:
