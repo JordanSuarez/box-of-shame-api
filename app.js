@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
 const passport = require('./utils/passport');
 const jwtService = require('./services/jwt');
+const specs = require('./utils/swagger');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,5 +34,8 @@ app.use('/protected', passport.authenticate('jwt', { session: false }), async (r
   }
   return res.status(403).send({ error: 'Permission refused' });
 });
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 module.exports = app;

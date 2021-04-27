@@ -5,16 +5,22 @@ class BlameController {
     const { id } = req.params;
     try {
       const blame = await models.blame.findByPk(id);
-      return res.status(200).json(blame);
+      if (blame) {
+        return res.status(200).json(blame);
+      }
+      return res.status(404).json({ message: 'Blame not found' });
     } catch (err) {
-      return res.status(500).json({ message: 'Blame not found', err });
+      return res.status(500).json({ message: err });
     }
   }
 
   async getBlames(req, res) {
     try {
       const blames = await models.blame.findAll({ raw: true });
-      return res.status(200).json(blames);
+      if (blames.length > 0) {
+        return res.status(200).json(blames);
+      }
+      return res.status(404).json({ message: 'Blames not found' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }

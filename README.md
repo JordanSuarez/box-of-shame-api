@@ -1,10 +1,12 @@
 # box-of-shame-api
 
-## Init project
+## Start project
+### Initialization
 * docker-compose up --build -d
 
-## Start project
+### Start
 * docker-compose up -d
 
-## Postman collection
-* 
+## Documentation
+### Swagger UI
+* http://localhost:3000/api-docs
