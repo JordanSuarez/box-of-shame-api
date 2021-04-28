@@ -14,11 +14,11 @@ class UserBlameController {
           userId,
           blameId: randomBlame.id,
         });
-        return res.status(200).send({ blames: randomBlame });
+        return res.status(200).send(randomBlame);
       }
       return res.status(400).json({ message: 'All the blames have been withdrawn' });
     } catch (err) {
-      return res.status(500).json({ message: 'Blame not found', err });
+      return res.status(500).json({ message: err });
     }
   }
 }

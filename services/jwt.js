@@ -14,11 +14,11 @@ class JwtService {
     return await userService.getUserByParam({ id: userId });
   }
 
-  async getUserRoleFromJwt(req) {
-    const token = this.extractToken(req);
-    const { isAdmin } = jwt.verify(token, JWT_SECRET_KEY);
-    return (isAdmin === 1);
-  }
+  // async getUserRoleFromJwt(req) {
+  //   const token = this.extractToken(req);
+  //   const { isAdmin } = jwt.verify(token, JWT_SECRET_KEY);
+  //   return (isAdmin === 1);
+  // }
 }
 
 const jwtService = new JwtService();

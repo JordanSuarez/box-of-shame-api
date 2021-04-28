@@ -11,12 +11,33 @@ const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.JWT_SECRET_KEY;
 
-passport.use(new JwtStrategy(jwtOptions, (
-  async (jwtPayload, done) => await models.user.findByPk(jwtPayload.id)
+passport.use(new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
+  return await models.user.findByPk(jwtPayload.id)
     .then((user) => done(null, user))
-    .catch((err) => done(err))
-)));
+    .catch((err) => {
+      done(err);
+    });
+}));
 
+// passport.use(new JwtStrategy(jwtOptions, (async (jwtPayload, done) => {
+//   const toto = await models.user.findByPk(jwtPayload.id, (err, user) => {
+//     if (err) {
+//       console.log(err);
+//
+//       return done(err, false);
+//     }
+//     return console.log(err, user);
+//     // if (user) {
+//     //   console.log(user, 'passss');
+//     //
+//     //   return done(null, user);
+//     // }
+//     // console.log(toto, 'falllllllseeee');
+//     //
+//     // return done(null, false);
+//     // or you could create a new account
+//   });
+// })));
 // passport.use(new Strategy({
 //   usernameField: 'email',
 // },

@@ -7,18 +7,24 @@ class UserController {
     const { id } = req.params;
     try {
       const user = await models.user.findByPk(id);
-      const userFormatted = userService.formatUser(user);
-      return res.status(200).json(userFormatted);
+      if (user) {
+        const userFormatted = userService.formatUser(user);
+        return res.status(200).json(userFormatted);
+      }
+      return res.status(404).json({ message: 'User not found' });
     } catch (err) {
-      return res.status(500).json({ message: 'User not found', err });
+      return res.status(500).json({ message: err });
     }
   }
 
   async getUsers(req, res) {
     try {
       const users = await models.user.findAll({ raw: true });
-      const usersFormatted = users.map((user) => userService.formatUser(user));
-      return res.status(200).json(usersFormatted);
+      if (users.length > 0) {
+        const usersFormatted = users.map((user) => userService.formatUser(user));
+        return res.status(200).json(usersFormatted);
+      }
+      return res.status(404).json({ message: 'Users not found' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -28,9 +34,9 @@ class UserController {
     try {
       const user = await jwtService.getUserFromJwt(req);
       if (user) {
-        return res.status(200).json({ user: userService.formatUser(user) });
+        return res.status(200).json(userService.formatUser(user));
       }
-      return res.status(400);
+      return res.status(404).json({ message: 'My profile not found' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -43,9 +49,9 @@ class UserController {
       if (user) {
         await models.user.update(req.body, { where: { id: user.id } });
         const userUpdated = await userService.getUserByParam({ id: user.id });
-        return res.status(200).json({ user: userService.formatUser(userUpdated) });
+        return res.status(200).json(userService.formatUser(userUpdated));
       }
-      return res.status(400);
+      return res.status(404).json({ message: 'My profile not found' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -58,7 +64,7 @@ class UserController {
         await models.user.destroy({ where: { id: user.id } });
         return res.status(200).send({ message: 'User has been deleted' });
       }
-      return res.status(400);
+      return res.status(404).json({ message: 'My profile not found' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }

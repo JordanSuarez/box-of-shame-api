@@ -15,7 +15,7 @@ class AuthController {
         }
         return res.status(400).send({ error: 'Data not formatted properly' });
       }
-      return res.status(400).send({ error: 'Email address already taken' });
+      return res.status(409).send({ error: 'Email address already taken' });
     } catch (err) {
       return res.status(500).send({ message: err });
     }
@@ -35,7 +35,7 @@ class AuthController {
       }
       return res.status(403).json({ message: 'Password or email is incorrect' });
     }
-    return res.status(403).json({ message: 'Missing Credentials' });
+    return res.status(400).json({ message: 'Missing Credentials' });
   }
 
   // async logout(req, res, err, user, info) {
