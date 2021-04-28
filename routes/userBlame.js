@@ -14,20 +14,6 @@ const { getRandomBlame } = require('../controllers/userBlame');
  *     - Blame
  *   security:
  *     - BearerAuth: [read]
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: Blame id.
- *        title:
- *          type: string
- *          description: Blame title.
- *        content:
- *          type: string
- *          description: Blame content.
  *   responses:
  *    200:
  *     description: Blame

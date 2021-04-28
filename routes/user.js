@@ -8,6 +8,31 @@ const {
 
 /**
  * @swagger
+ * definitions:
+ *  User:
+ *    type: object
+ *    properties:
+ *     username:
+ *       type: string
+ *       description: User name.
+ *       example: 'toto'
+ *     email:
+ *       type: string
+ *       description: User email.
+ *       example: 'john@doe.fr'
+ *     password:
+ *       type: string
+ *       description: User password
+ *       example: 'myPassword'
+ *  User_id:
+ *    type: integer
+ *    required: true
+ *    description: Id of the user
+ *    example: 4
+ */
+
+/**
+ * @swagger
  * /users/list:
  *  get:
  *   summary: Get users list
@@ -16,20 +41,6 @@ const {
  *     - User
  *   security:
  *     - BearerAuth: [read]
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: User id.
- *        username:
- *          type: string
- *          description: User name.
- *        email:
- *          type: string
- *          description: User email.
  *   responses:
  *    200:
  *     description: Users list
@@ -56,24 +67,7 @@ userRouter.get('/list', getUsers);
  *    - in: path
  *      name: user_id
  *      schema:
- *        type: integer
- *        required: true
- *        description: Id of the user
- *        example: 2
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: User id.
- *        username:
- *          type: string
- *          description: User name.
- *        email:
- *          type: string
- *          description: User email.
+ *        $ref: '#/definitions/User_id'
  *   responses:
  *    200:
  *     description: User
@@ -96,20 +90,6 @@ userRouter.get('/:id', getUserById);
  *     - User
  *   security:
  *     - BearerAuth: [read]
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: User Id.
- *        username:
- *          type: string
- *          description: User name.
- *        email:
- *          type: string
- *          description: User email.
  *   responses:
  *    200:
  *     description: User
@@ -136,20 +116,7 @@ userRouter.get('/profile/me', getMyProfile);
  *    content:
  *     application/json:
  *      schema:
- *       type: object
- *       properties:
- *        username:
- *          type: string
- *          description: User name.
- *          example: 'toto'
- *        email:
- *          type: string
- *          description: User email.
- *          example: 'john@doe.fr'
- *        password:
- *          type: string
- *          description: User password
- *          example: 'toto'
+ *        $ref: '#/definitions/User'
  *   responses:
  *    200:
  *     description: User has been updated
