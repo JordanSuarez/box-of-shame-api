@@ -28,25 +28,3 @@ const options = {
 const specs = swaggerJsDoc(options);
 
 module.exports = specs;
-
-// components: {
-// schemas: {
-//   register: {
-//     properties: {
-//       id: {
-//         type: 'integer',
-//       },
-//       username: {
-//         type: 'string',
-//       },
-//       email: {
-//         type: 'string',
-//       },
-//       password: {
-//         type: 'string',
-//       },
-//     },
-//   },
-// },
-// },
-

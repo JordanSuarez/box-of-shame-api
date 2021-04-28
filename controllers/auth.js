@@ -37,38 +37,6 @@ class AuthController {
     }
     return res.status(400).json({ message: 'Missing Credentials' });
   }
-
-  // async logout(req, res, err, user, info) {
-  //   if (err || !user) {
-  //     return res.status(400).json({
-  //       message: info ? info.message : 'Logout failed',
-  //       user,
-  //     });
-  //   }
-  //   const payload = { id: '' };
-  //   const token = await jwt.sign(payload, jwtSecretKey);
-  //   console.log('token', token);
-  //   req.logout();
-  //   return res.status(200).json({ message: 'Logout successfull' });
-  // }
-
-  // async login(req, res) {
-  //   // if (err || !user) {
-  //   //   return res.status(400).json({
-  //   //     message: info ? info.message : 'Login failed',
-  //   //     user,
-  //   //   });
-  //   // }
-  //   // return await req.login(user, { session: false }, async (error) => {
-  //   //   if (error) {
-  //   //     res.send(error);
-  //   //   }
-  //   console.log(req)
-  //     // const payload = { id: user.id };
-  //     // const token = await jwt.sign(payload, jwtSecretKey);
-  //     // return res.status(200).json({ user, token });
-  //   // });
-  // }
 }
 
 const authController = new AuthController();
