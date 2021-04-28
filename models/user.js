@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasOne(models.userBlame, { onDelete: 'cascade', hooks: true });
     }
   }
   user.init({
-    name: DataTypes.STRING,
+    username: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    isAdmin: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'user',
