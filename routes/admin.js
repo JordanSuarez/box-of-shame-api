@@ -20,16 +20,7 @@ const {
  *    content:
  *     application/json:
  *      schema:
- *        type: object
- *        properties:
- *          title:
- *            type: string
- *            description: Blame title
- *            example: 'My blame title'
- *          content:
- *            type: string
- *            description: Blame content
- *            example: 'My blame content'
+ *        $ref: '#/definitions/Blame'
  *   responses:
  *    201:
  *     description: Blame created successfully
@@ -54,24 +45,12 @@ adminRouter.post('/blames/new', createBlame);
  *    - in: path
  *      name: blame_id
  *      schema:
- *        type: integer
- *        required: true
- *        description: Id of the blame
- *        example: 2
+ *        $ref: '#/definitions/Blame_id'
  *   requestBody:
  *    content:
  *     application/json:
  *      schema:
- *       type: object
- *       properties:
- *        title:
- *          type: string
- *          description: Blame title
- *          example: 'My blame title'
- *        content:
- *          type: string
- *          description: Blame content
- *          example: 'My blame content'
+ *        $ref: '#/definitions/Blame'
  *   responses:
  *    200:
  *     description: Blame has been updated
@@ -98,10 +77,7 @@ adminRouter.put('/blames/update/:id', updateBlame);
  *    - in: path
  *      name: blame_id
  *      schema:
- *        type: integer
- *        required: true
- *        description: Id of the blame
- *        example: 2
+ *        $ref: '#/definitions/Blame_id'
  *   responses:
  *    200:
  *     description: User has been deleted

@@ -2,7 +2,23 @@ const express = require('express');
 
 const authRouter = express.Router();
 
-const { register, login, logout } = require('../controllers/auth');
+const { register, login } = require('../controllers/auth');
+
+/**
+ * @swagger
+ * definitions:
+ *  Login:
+ *    type: object
+ *    properties:
+ *     email:
+ *      type: string
+ *      description: User email
+ *      example: 'john@doe.fr'
+ *     password:
+ *      type: string
+ *      description: User password
+ *      example: 'myPassword'
+ */
 
 /**
  * @swagger
@@ -16,20 +32,7 @@ const { register, login, logout } = require('../controllers/auth');
  *    content:
  *     application/json:
  *      schema:
- *        type: object
- *        properties:
- *          username:
- *            type: string
- *            description: User name
- *            example: 'foo'
- *          email:
- *            type: string
- *            description: User email
- *            example: 'foo@bar.com'
- *          password:
- *            type: string
- *            description: User password
- *            example: 'myPassword'
+ *        $ref: '#/definitions/User'
  *   responses:
  *    201:
  *     description: User created successfully
@@ -54,16 +57,7 @@ authRouter.post('/register', register);
  *    content:
  *     application/json:
  *      schema:
- *        type: object
- *        properties:
- *         email:
- *          type: string
- *          description: User email
- *          example: 'foo@bar.com'
- *         password:
- *          type: string
- *          description: User password
- *          example: 'myPassword'
+ *        $ref: '#/definitions/Login'
  *   responses:
  *    200:
  *     description: User logged successfully
