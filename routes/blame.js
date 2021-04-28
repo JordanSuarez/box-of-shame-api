@@ -6,6 +6,27 @@ const { getBlameById, getBlames } = require('../controllers/blame');
 
 /**
  * @swagger
+ * definitions:
+ *  Blame:
+ *    type: object
+ *    properties:
+ *     title:
+ *       type: string
+ *       description: Blame title
+ *       example: 'My blame title'
+ *     content:
+ *       type: string
+ *       description: Blame content
+ *       example: 'My blame content'
+ *  Blame_id:
+ *    type: integer
+ *    required: true
+ *    description: Id of the blame
+ *    example: 3
+ */
+
+/**
+ * @swagger
  * /blames/list:
  *  get:
  *   summary: Get blames list
@@ -14,20 +35,6 @@ const { getBlameById, getBlames } = require('../controllers/blame');
  *     - Blame
  *   security:
  *     - BearerAuth: [read]
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: Blame ID.
- *        title:
- *          type: string
- *          description: Blame title.
- *        content:
- *          type: string
- *          description: Blame content.
  *   responses:
  *    200:
  *     description: Blames list
@@ -54,24 +61,7 @@ blameRouter.get('/list', getBlames);
  *    - in: path
  *      name: blame_id
  *      schema:
- *        type: integer
- *        required: true
- *        description: Id of the blame
- *        example: 2
- *   content:
- *    application/json:
- *     schema:
- *      type: object
- *      properties:
- *        id:
- *          type: integer
- *          description: Blame id.
- *        title:
- *          type: string
- *          description: Blame title.
- *        content:
- *          type: string
- *          description: Blame content.
+ *        $ref: '#/definitions/Blame_id'
  *   responses:
  *    200:
  *     description: Success

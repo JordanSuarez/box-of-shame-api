@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const passport = require('./utils/passport');
-const jwtService = require('./services/jwt');
 const specs = require('./utils/swagger');
 
 const app = express();
