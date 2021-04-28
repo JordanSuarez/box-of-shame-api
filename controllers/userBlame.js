@@ -6,17 +6,17 @@ class UserBlameController {
   async getRandomBlame(req, res) {
     try {
       const userId = (await jwtService.getUserFromJwt(req)).id;
-      const filteredBlame = await blameService.getFilteredBlames(userId);
-      const randomBlame = blameService.getRandomBlame(filteredBlame);
+      const filteredBlames = await blameService.getFilteredBlames(userId);
+      const randomBlame = blameService.getRandomBlame(filteredBlames);
       // Save withdrawn blame
-      if (filteredBlame.length > 0) {
+      if (filteredBlames.length > 0) {
         await models.userBlame.create({
           userId,
           blameId: randomBlame.id,
         });
-        return res.status(200).send(randomBlame);
+        return res.status(200).send(blameService.formattedBlame(randomBlame));
       }
-      return res.status(400).json({ message: 'All the blames have been withdrawn' });
+      return res.status(404).json({ message: 'All the blames have been withdrawn' });
     } catch (err) {
       return res.status(500).json({ message: err });
     }
