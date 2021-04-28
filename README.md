@@ -7,7 +7,6 @@
 ## Install process
 - `cp .env.dist .env`
 - `make build` (only the first time)
-- `make run`
 - `make migration`
 
 ## Usage
@@ -23,5 +22,5 @@
 * http://localhost:3000/api-docs to check the Swagger documentation
 
 ### Postman
-* https://www.getpostman.com/collections/6f895c66fa2027e65e0c to recover the Postman collection
-* `./postman/postman_environment.json` to recover the Postman environment variables
+* Get Postman collection: https://www.getpostman.com/collections/6f895c66fa2027e65e0c
+* Get Postman environment variables: `./postman/postman_environment.json`
