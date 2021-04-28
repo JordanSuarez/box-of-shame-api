@@ -17,7 +17,7 @@ const { getRandomBlame } = require('../controllers/userBlame');
  *   responses:
  *    200:
  *     description: Blame
- *    400:
+ *    404:
  *      description: All the blames have been withdrawn
  *    401:
  *     description: Unauthorized

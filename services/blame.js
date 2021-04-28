@@ -1,6 +1,14 @@
 const models = require('../models');
 
 class BlameService {
+  formattedBlame({ id, title, content }) {
+    return {
+      id,
+      title,
+      content,
+    };
+  }
+
   getRandomBlame(blames) {
     const random = Math.floor(Math.random() * blames.length);
     return blames[random];
